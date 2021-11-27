@@ -1,14 +1,23 @@
 call plug#begin()
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'] " list of CoC extensions needed
 Plug 'dense-analysis/ale'
+Plug 'rktjmp/lush.nvim' 
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'gko/vim-coloresque'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'cohama/lexima.vim'
 Plug 'thaerkh/vim-indentguides'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 nnoremap <C-n> :NERDTreeToggle<CR>
@@ -19,6 +28,7 @@ set number
 set relativenumber
 set mouse=a
 set background=dark
+colorscheme gruvbox
 set termguicolors
 
 " AIRLINE
@@ -63,4 +73,31 @@ nnoremap <F2> :bnext<CR>
 nnoremap <silent> <s-Down> :m +1<CR> 
 nnoremap <silent> <s-Up> :m -2<CR>
 vnoremap <C-c> "+y<CR>
-nnoremap <C-t> :split term://bash<CR>
+"nnoremap <C-t> :split term://bash<CR>
+
+" open new split panes to right and belows
+set splitright
+set splitbelow
+
+" turn terminal to normal mode with escapet
+noremap <Esc> <C-\><C-n>
+" start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" open terminal on ctrl+nn
+"
+function! OpenTerminal() 
+	split term://bash 
+	resize 10
+endfunction
+
+nnoremap <c-z> :call OpenTerminal()<CR>
+
+
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+\ 'ctrl-t': 'tab split',
+\ 'ctrl-s': 'split',
+\ 'ctrl-v': 'vsplit'
+\}
+
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
