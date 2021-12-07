@@ -6,7 +6,6 @@ Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier'] " list of CoC extensions needed
 Plug 'dense-analysis/ale'
 Plug 'rktjmp/lush.nvim' 
 Plug 'ellisonleao/gruvbox.nvim'
@@ -17,11 +16,24 @@ Plug 'thaerkh/vim-indentguides'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'prettier/vim-prettier'
+Plug 'mattn/emmet-vim'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-actions',
+  \ 'coc-lists',
+  \ 'coc-tsserver',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-prettier',
+  \ 'coc-vimlsp',
+  \ ]
 
 syntax enable
 set number
@@ -36,7 +48,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1 
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1 
 let g:airline#extensions#tabline#tab_nr_type = 1 
-let g:airline_theme='dalton'
+let g:airline_theme='dracula'
 
 " Configurações do CoC.nvim
 
@@ -90,7 +102,7 @@ function! OpenTerminal()
 	resize 10
 endfunction
 
-nnoremap <c-z> :call OpenTerminal()<CR>
+nnoremap <c-b> :call OpenTerminal()<CR>
 
 
 nnoremap <C-p> :FZF<CR>
